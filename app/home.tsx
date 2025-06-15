@@ -160,7 +160,7 @@ const HomeScreen: React.FC = () => {
       {/* 添加灵感按钮 */}
       <AnimatedFloatingActionButton
         icon='lightbulb-on'
-        label='灵感来啦'
+        label='来灵感啦'
         position='right'
         onPress={() => setIsModalVisible(true)}
         backgroundColor='#007AFF'
