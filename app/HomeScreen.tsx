@@ -115,7 +115,7 @@ const HomeScreen: React.FC = () => {
       style={[
         styles.container,
         {
-          paddingTop: insets.top,
+          // paddingTop: insets.top,
         },
       ]}
     >
