@@ -1,50 +1,132 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🚀 Welcome to Your AhaNote App
 
-## Get started
+[English](./README.md) | [中文](./README_CN.md)
 
-1. Install dependencies
+This is a [**Expo**](https://expo.dev) project created using [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-   ```bash
-   npm install
-   ```
+## 🧰 Prerequisites
 
-2. Start the app
+Before you begin, make sure you have the following installed on your machine:
 
-   ```bash
-   npx expo start
-   ```
+- **Node.js** (we recommend v18.x)
+- **npm** or **yarn**
+- **Expo CLI**
 
-In the output, you'll find options to open the app in a
+We'll walk through setting up everything from scratch below.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🖥️ Development Setup on macOS (Recommended)
 
-## Get a fresh project
+### 1. Install Homebrew (if not already installed)
 
-When you're ready, run:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 2. Install `nvm` (Node Version Manager)
+
+Add `nvm` to your shell profile (`~/.zshrc` or `~/.bash_profile`, depending on your shell):
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+
+Then reload your shell config:
+
+```bash
+source ~/.zshrc   # or source ~/.bash_profile
+```
+
+Verify installation:
+
+```bash
+nvm --version
+```
+
+### 3. Install and Use Node.js v18
+
+List available versions:
+
+```bash
+nvm ls-remote
+```
+
+Install Node.js v18:
+
+```bash
+nvm install 18
+```
+
+Set it as default:
+
+```bash
+nvm alias default 18
+```
+
+Check current version:
+
+```bash
+node -v
+```
+
+You should see output like: `v18.x.x`.
+
+---
+
+## 📱 Get Started with the Project
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+Or with yarn:
+
+```bash
+yarn install
+```
+
+### 2. Start the Development Server
+
+```bash
+npx expo start
+```
+
+> You can now open the app in:
+> - **iOS Simulator** (press `i`)
+> - **Android Emulator** (press `a`)
+> - **Expo Go** on your phone (scan the QR code)
+
+---
+
+## 🛠️ Learn More
+
+To dive deeper into developing with Expo, check out these resources:
+
+- [📘 Expo Documentation](https://docs.expo.dev/)
+- [📘 File-based Routing Guide](https://docs.expo.dev/router/introduction/)
+- [📘 Learn Expo Tutorial](https://docs.expo.dev/tutorial/introduction/)
+
+---
+
+## 🌐 Join the Community
+
+- [GitHub Repo](https://github.com/expo/expo)
+- [Discord Chat](https://chat.expo.dev)
+- [Expo Forums](https://forums.expo.dev)
+
+---
+
+## 💡 Reset the Project (Optional)
+
+If you want a fresh start, run:
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This will move the starter code to the `app-example` directory and give you a clean `app` folder to develop in.
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

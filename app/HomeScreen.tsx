@@ -153,7 +153,7 @@ const HomeScreen: React.FC = () => {
           style={[styles.emptyState, { paddingBottom: insets.bottom + 100 }]}
         >
           <Text style={styles.emptyText}>还没有记录灵感</Text>
-          <Text style={styles.hintText}>点击下方按钮添加第一条灵感</Text>
+          <Text style={styles.hintText}>点击下方按钮添加一条灵感</Text>
         </View>
       )}
 
@@ -174,7 +174,7 @@ const HomeScreen: React.FC = () => {
         visible={isModalVisible}
         onConfirm={handleConfirm}
         onClose={handleClose}
-        snapPoints={['68%']}
+        snapPoints={['75%']}
         text={editContent}
       />
     </View>

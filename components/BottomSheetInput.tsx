@@ -90,8 +90,9 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
 
   // 自定义工具栏底部边距
   const getToolbarMargin = () => {
+    console.log('isKeyboardVisible', isKeyboardVisible);
     if (isKeyboardVisible) {
-      return 0;
+      return 10;
     }
     return Platform.OS === 'ios' ? Math.max(safeInsets.bottom, 16) : 16;
   };
@@ -243,66 +244,6 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
             />
           </BottomSheetView>
 
-          {/* 工具栏固定在底部 */}
-          <BottomSheetView
-            style={[
-              styles.toolbarContainer,
-              {
-                marginBottom: getToolbarMargin(),
-              },
-            ]}
-          >
-            <View style={styles.toolbarContent}>
-              {/* 左侧滚动按钮区域 */}
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                keyboardShouldPersistTaps="handled"
-                style={styles.buttonScrollView}
-              >
-                <View style={styles.buttonGroup}>
-                  {/* 加粗按钮 */}
-                  <ToolbarButton 
-                    active={formats.bold}
-                    icon="bold"
-                    onPress={() => toggleFormat('bold')}
-                  />
-                  {/* 斜体按钮 */}
-                  <ToolbarButton 
-                    active={formats.italic}
-                    icon="italic"
-                    onPress={() => toggleFormat('italic')}
-                  />
-                  {/* 下划线按钮 */}
-                  <ToolbarButton 
-                    active={formats.underline}
-                    icon="underline"
-                    onPress={() => toggleFormat('underline')}
-                  />
-                  {/* 列表按钮 */}
-                  <ToolbarButton 
-                    active={formats.list}
-                    icon="list"
-                    onPress={() => toggleFormat('list')}
-                  />
-                </View>
-              </ScrollView>
-
-              <TouchableOpacity
-                style={styles.toolbarButton}
-                onPress={() => console.log('Voice button clicked')}
-              >
-                <Icon name="mic" size={20} color="#333" />
-              </TouchableOpacity>
-              {/* 右侧确认按钮 */}
-              {/* <TouchableOpacity
-                style={styles.confirmButton}
-                onPress={handleConfirm}
-              >
-                <Icon name="send" size={24} color="#fff" />
-              </TouchableOpacity> */}
-            </View>
-          </BottomSheetView>
         </KeyboardAvoidingView>
       </BottomSheet>
     </View>
