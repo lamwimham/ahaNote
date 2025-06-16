@@ -111,14 +111,6 @@ npx expo start
 
 ---
 
-## 🌐 加入社区
-
-- [GitHub 仓库](https://github.com/expo/expo)
-- [Discord 社区聊天室](https://chat.expo.dev)
-- [Expo 论坛](https://forums.expo.dev)
-
----
-
 ## 💡 重置项目（可选）
 
 如果你想获得一个全新的项目结构，运行以下命令：

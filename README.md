@@ -112,14 +112,6 @@ To dive deeper into developing with Expo, check out these resources:
 
 ---
 
-## 🌐 Join the Community
-
-- [GitHub Repo](https://github.com/expo/expo)
-- [Discord Chat](https://chat.expo.dev)
-- [Expo Forums](https://forums.expo.dev)
-
----
-
 ## 💡 Reset the Project (Optional)
 
 If you want a fresh start, run:
