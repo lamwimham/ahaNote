@@ -1,10 +1,13 @@
 import AnimatedFloatingActionButton from '@/components/AnimatedFloatingActionButton';
 import BottomSheetInput from '@/components/BottomSheetInput';
 import SwipeableCard from '@/components/SwipeableCard';
+import { ThemedText } from '@/components/ThemedText';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, Animated } from 'react-native';
+import { View, StyleSheet, ScrollView, Animated } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList} from '@/types/types';
 // 定义灵感数据类型
 interface InspirationItem {
   id: string;
@@ -29,6 +32,7 @@ const HomeScreen: React.FC = () => {
   const [inspirations, setInspirations] = useState<InspirationItem[]>(
     generateMockInspirations()
   );
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [selectId, setSelectId] = useState<string | null>(null);
   const insets = useSafeAreaInsets();
   const [scrollEnabled, setScrollEnabled] = useState(true);
@@ -111,6 +115,7 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
+    <>
     <View
       style={[
         styles.container,
@@ -152,8 +157,8 @@ const HomeScreen: React.FC = () => {
         <View
           style={[styles.emptyState, { paddingBottom: insets.bottom + 100 }]}
         >
-          <Text style={styles.emptyText}>还没有记录灵感</Text>
-          <Text style={styles.hintText}>点击下方按钮添加一条灵感</Text>
+          <ThemedText style={styles.emptyText}>还没有记录灵感</ThemedText>
+          <ThemedText style={styles.hintText}>点击下方按钮添加一条灵感</ThemedText>
         </View>
       )}
 
@@ -178,6 +183,8 @@ const HomeScreen: React.FC = () => {
         text={editContent}
       />
     </View>
+    </>
+
   );
 };
 

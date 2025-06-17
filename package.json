@@ -1,5 +1,5 @@
 {
-  "name": "notebook",
+  "name": "AhaNote",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -17,6 +17,7 @@
     "@react-navigation/drawer": "^7.4.1",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.10",
+    "@react-navigation/stack": "^7.3.3",
     "expo": "~53.0.7",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.5",
@@ -38,7 +39,7 @@
     "react-native-keyboard-controller": "^1.17.3",
     "react-native-paper": "^5.14.5",
     "react-native-reanimated": "~3.17.4",
-    "react-native-safe-area-context": "^5.4.0",
+    "react-native-safe-area-context": "^5.4.1",
     "react-native-screens": "~4.10.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.20.0",
