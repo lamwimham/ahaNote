@@ -1,7 +1,8 @@
 // screens/HistoryScreen.tsx
 import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 
 const HistoryScreen: React.FC = () => {
   const historyItems = [
@@ -11,18 +12,18 @@ const HistoryScreen: React.FC = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <ThemedText style={styles.title}>History</ThemedText>
       <FlatList
         data={historyItems}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.item}>
+          <ThemedView style={styles.item}>
             <ThemedText>{item.label}</ThemedText>
-          </View>
+          </ThemedView>
         )}
       />
-    </View>
+    </ThemedView>
   );
 };
 

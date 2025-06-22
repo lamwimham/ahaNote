@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { View, Switch, Text, StyleSheet } from 'react-native';
+import { Switch, StyleSheet } from 'react-native';
 
-import CustomHeader from '@/components/CustomHeader';
+// import CustomHeader from '@/components/CustomHeader';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList} from '@/types/types';
+// import { useNavigation } from '@react-navigation/native';
+// import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+// import { RootStackParamList} from '@/types/types';
 export default function SettingsScreen() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  // const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     // 此处应调用全局主题切换函数，例如通过 Context 或 Redux
@@ -18,23 +18,23 @@ export default function SettingsScreen() {
 
   return (
     <>
-      <CustomHeader title="Settings" navigation={navigation} />
+      {/* <CustomHeader title="Settings" navigation={navigation} /> */}
       <ThemedView style={styles.container}>
-        <View style={styles.settingItem}>
+        <ThemedView style={styles.settingItem}>
           <ThemedText style={styles.settingLabel}>Night Mode</ThemedText>
           <Switch value={isDarkMode} onValueChange={toggleTheme} />
-        </View>
+        </ThemedView>
 
         {/* 可选设置项 */}
-        <View style={styles.settingItem}>
+        <ThemedView style={styles.settingItem}>
           <ThemedText style={styles.settingLabel}>Notifications</ThemedText>
           <Switch value={true} onValueChange={() => {}} />
-        </View>
+        </ThemedView>
 
-        <View style={styles.settingItem}>
+        <ThemedView style={styles.settingItem}>
           <ThemedText style={styles.settingLabel}>Enable Biometric Login</ThemedText>
           <Switch value={false} onValueChange={() => {}} />
-        </View>
+        </ThemedView>
       </ThemedView>
     </>
   );

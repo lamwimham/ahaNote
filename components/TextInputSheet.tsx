@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context'; // 👈 已引入
+import { ThemedView } from './ThemedView';
 
 // 👇 在文件顶部添加以下接口定义（或根据实际情况导入）
 interface TextInputSheetProps {
@@ -100,7 +101,7 @@ const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
           onContentSizeChange={onContentSizeChange} // 监听内容尺寸变化
         >
           <BottomSheetView style={styles.container}>
-            <View style={{ flex: 1 }}>
+            <ThemedView style={{ flex: 1 }}>
 
               {/* 输入框区域，受键盘影响抬高 */}
               <Animated.View
@@ -122,7 +123,7 @@ const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
                   submitBehavior='submit'
                 />
               </Animated.View>
-            </View>
+            </ThemedView>
           </BottomSheetView>
         </ScrollView>
       </KeyboardAvoidingView>

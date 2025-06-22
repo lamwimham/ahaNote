@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  View,
   AppState,
   AppStateStatus,
-  Dimensions,
   TouchableWithoutFeedback,
 } from 'react-native';
 
@@ -20,6 +17,7 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Feather';
+import { ThemedView } from './ThemedView';
 
 interface BottomSheetInputProps {
   visible: boolean;
@@ -206,10 +204,10 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
   if (!visible) return null;
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       {/* 添加背景遮罩层 */}
       <TouchableWithoutFeedback onPress={handleBackgroundPress}>
-        <View style={styles.overlay} />
+        <ThemedView style={styles.overlay} />
       </TouchableWithoutFeedback>
       
       {/* 底部弹窗组件 */}
@@ -246,7 +244,7 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
 
         </KeyboardAvoidingView>
       </BottomSheet>
-    </View>
+    </ThemedView>
   );
 };
 

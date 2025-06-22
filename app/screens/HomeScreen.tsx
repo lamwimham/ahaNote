@@ -4,10 +4,11 @@ import SwipeableCard from '@/components/SwipeableCard';
 import { ThemedText } from '@/components/ThemedText';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useRef } from 'react';
-import { View, StyleSheet, ScrollView, Animated } from 'react-native';
+import {  StyleSheet, ScrollView, Animated } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList} from '@/types/types';
+import { ThemedView } from '@/components/ThemedView';
 // 定义灵感数据类型
 interface InspirationItem {
   id: string;
@@ -116,7 +117,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <>
-    <View
+    <ThemedView
       style={[
         styles.container,
         {
@@ -154,12 +155,12 @@ const HomeScreen: React.FC = () => {
           ))}
         </ScrollView>
       ) : (
-        <View
+        <ThemedView
           style={[styles.emptyState, { paddingBottom: insets.bottom + 100 }]}
         >
           <ThemedText style={styles.emptyText}>还没有记录灵感</ThemedText>
           <ThemedText style={styles.hintText}>点击下方按钮添加一条灵感</ThemedText>
-        </View>
+        </ThemedView>
       )}
 
       {/* 添加灵感按钮 */}
@@ -182,7 +183,7 @@ const HomeScreen: React.FC = () => {
         snapPoints={['75%']}
         text={editContent}
       />
-    </View>
+    </ThemedView>
     </>
 
   );

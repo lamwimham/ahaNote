@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
-  View, 
-  Text, 
   StyleSheet, 
   Animated, 
   PanResponder, 
@@ -10,6 +8,8 @@ import {
 } from 'react-native';
 import { Card, useTheme } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
+import { ThemedView } from './ThemedView';
+import { ThemedText } from './ThemedText';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.7; // 滑动阈值
@@ -373,7 +373,7 @@ const updateTextAnimation = (dx: number) => {
   };
 
   return (
-    <View style={[styles.container, style]}>
+    <ThemedView style={[styles.container, style]}>
       {/* 卡片容器 */}
       <Animated.View 
         style={[styles.cardWrapper, cardStyle]} 
@@ -392,7 +392,7 @@ const updateTextAnimation = (dx: number) => {
             subtitleStyle={styles.cardSubtitle}
           />
           <Card.Content>
-            <Text style={styles.cardContent}>{content}</Text>
+            <ThemedText style={styles.cardContent}>{content}</ThemedText>
           </Card.Content>
         </Card>
       </Animated.View>
@@ -416,7 +416,7 @@ const updateTextAnimation = (dx: number) => {
           style={styles.textIcon}
         />
       </Animated.View>
-    </View>
+    </ThemedView>
   );
 };
 

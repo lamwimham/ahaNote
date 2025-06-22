@@ -11,6 +11,8 @@ import {
 import { Drawer, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { ThemedView } from './ThemedView';
+import { ThemedText } from './ThemedText';
 
 interface MenuItem {
   icon: string;
@@ -45,13 +47,13 @@ export const CustomDrawer = (props: any) => {
     <DrawerContentScrollView {...props}>
       <SafeAreaView style={styles.container}>
         {/* 用户信息 */}
-        <View style={[styles.profileSection, { backgroundColor: theme.colors.surfaceVariant }]}>
+        <ThemedView style={[styles.profileSection, { backgroundColor: theme.colors.surfaceVariant }]}>
           <Icon name="person-circle-outline" size={64} color={theme.colors.onSurface} />
-          <View style={styles.profileInfo}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>用户名</Text>
-            <Text style={{ fontSize: 14, color: 'gray' }}>user@example.com</Text>
-          </View>
-        </View>
+          <ThemedView style={styles.profileInfo}>
+            <ThemedText style={{ fontSize: 20, fontWeight: 'bold' }}>用户名</ThemedText>
+            <ThemedText style={{ fontSize: 14, color: 'gray' }}>user@example.com</ThemedText>
+          </ThemedView>
+        </ThemedView>
 
         {/* 菜单项 */}
         {menuItems.map((item, index) => (
@@ -59,10 +61,10 @@ export const CustomDrawer = (props: any) => {
             <TouchableWithoutFeedback
               onPress={() => setExpandedItem(expandedItem === item.label ? null : item.label)}
             >
-              <View style={styles.collapsibleHeader}>
+              <ThemedView style={styles.collapsibleHeader}>
                 <Icon name={item.icon} size={24} color={theme.colors.onSurface} />
-                <Text style={{ marginLeft: 16 }}>{item.label}</Text>
-              </View>
+                <ThemedText style={{ marginLeft: 16 }}>{item.label}</ThemedText>
+              </ThemedView>
             </TouchableWithoutFeedback>
 
             {expandedItem === item.label &&

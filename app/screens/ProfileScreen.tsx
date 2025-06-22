@@ -7,20 +7,20 @@ import { ThemedView } from '@/components/ThemedView';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList} from '@/types/types';
 export default function ProfileScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  // const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <>
-      <CustomHeader navigation={navigation} title="Profile" />
+      {/* <CustomHeader navigation={navigation} title="Profile" /> */}
       <ThemedView style={styles.container}>
         <ThemedText style={styles.welcomeText}>Welcome back! This is your profile.</ThemedText>
 
         {/* 可选的额外内容区域 */}
-        <View style={styles.card}>
+        <ThemedView style={styles.card}>
           <ThemedText style={styles.cardTitle}>User Info</ThemedText>
           <ThemedText style={styles.cardContent}>Name: John Doe</ThemedText>
           <ThemedText style={styles.cardContent}>Email: john.doe@example.com</ThemedText>
-        </View>
+        </ThemedView>
       </ThemedView>
     </>
   );

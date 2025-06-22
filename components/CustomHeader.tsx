@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import type { NavigationProp } from '@react-navigation/native';
 import { ThemedView } from './ThemedView';
+import { ThemedText } from './ThemedText';
 
 // 定义导航类型
 type AllowedNavigationProp =
@@ -49,9 +50,9 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ navigation, title = 'AhaNot
         </ThemedView>
 
         {/* 中间：标题 */}
-        <Text numberOfLines={1} ellipsizeMode="head" style={styles.title}>
+        <ThemedText numberOfLines={1} ellipsizeMode="head" style={styles.title}>
           {title}
-        </Text>
+        </ThemedText>
 
         {/* 右侧：图标组 */}
         <ThemedView style={styles.rightActions}>
