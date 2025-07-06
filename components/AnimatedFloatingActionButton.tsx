@@ -72,7 +72,7 @@ const AnimatedFloatingActionButton: React.FC<AnimatedFloatingActionButtonProps> 
           // 半透明效果
           Animated.parallel([
             Animated.timing(fadeAnim, {
-              toValue: 0,
+              toValue: 0.33,
               duration: 300,
               useNativeDriver: true,
             }),
@@ -103,7 +103,7 @@ const AnimatedFloatingActionButton: React.FC<AnimatedFloatingActionButtonProps> 
             useNativeDriver: true,
           })
         ]).start();
-        }, 200);
+        }, 100);
       }
 
       // 滚动到顶部 - 展开按钮并不透明
@@ -131,7 +131,7 @@ const AnimatedFloatingActionButton: React.FC<AnimatedFloatingActionButtonProps> 
       scrollY.removeListener(listener);
       if (scrollTimeout) clearTimeout(scrollTimeout);
     };
-  }, [scrollY, scrollThreshold, fadeOnScroll]);
+  }, [scrollY, scrollThreshold, fadeOnScroll, fadeAnim, scaleAnim]);
 
   // 计算位置样式 - 考虑安全区域
   const getPositionStyle = () => {

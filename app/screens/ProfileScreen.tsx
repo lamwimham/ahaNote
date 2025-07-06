@@ -1,11 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import CustomHeader from '@/components/CustomHeader';
+import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { useNavigation } from '@react-navigation/native';
 import { ThemedView } from '@/components/ThemedView';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList} from '@/types/types';
 export default function ProfileScreen() {
   // const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 

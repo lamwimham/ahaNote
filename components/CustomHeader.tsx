@@ -1,17 +1,18 @@
-// components/CustomHeader.tsx
-import React, { memo } from 'react';
+// CustomHeader.tsx
+import React, { memo, useCallback } from 'react';
 import {
-  Text,
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
+  TextStyle,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import type { NavigationProp } from '@react-navigation/native';
 import { ThemedView } from './ThemedView';
 import { ThemedText } from './ThemedText';
+import { useTheme } from 'react-native-paper';
 
 // 定义导航类型
 type AllowedNavigationProp =
@@ -22,83 +23,128 @@ type AllowedNavigationProp =
 interface CustomHeaderProps {
   navigation: AllowedNavigationProp;
   title?: string; // 支持自定义标题
+  headerTitleStyle?: TextStyle; // 自定义标题样式
+  rightComponent?: React.ReactNode; // 自定义右侧组件
 }
 
-// 主组件
-const CustomHeader: React.FC<CustomHeaderProps> = ({ navigation, title = 'AhaNote' }) => {
-  const navigateToHome = () => {
-    navigation.navigate('Home');
-  };
+const CustomHeader: React.FC<CustomHeaderProps> = ({
+  navigation,
+  title = 'AhaNote',
+  headerTitleStyle,
+  rightComponent,
+}) => {
+  const theme = useTheme();
 
-  const openDrawerIfAvailable = () => {
+  const navigateToHome = useCallback(() => {
+    navigation.navigate('Home');
+  }, [navigation]);
+
+  const openDrawerIfAvailable = useCallback(() => {
     if ('openDrawer' in navigation) {
       navigation.openDrawer();
     }
-  };
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ThemedView style={styles.headerContainer}>
-        {/* 左侧：Home + Menu 按钮 */}
+        {/* 左侧：Menu 按钮 */}
         <ThemedView style={styles.leftActions}>
-          <TouchableOpacity onPress={openDrawerIfAvailable} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <Icon name="menu" size={28} color="#000" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={navigateToHome} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <Icon name="home" size={28} color="#000" />
+          <TouchableOpacity
+            onPress={openDrawerIfAvailable}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <MaterialIcons
+              name="menu"
+              size={28}
+              color={theme.colors.onSurface}
+            />
           </TouchableOpacity>
         </ThemedView>
 
-        {/* 中间：标题 */}
-        <ThemedText numberOfLines={1} ellipsizeMode="head" style={styles.title}>
-          {title}
-        </ThemedText>
+        {/* 中间：标题（点击无反馈） */}
+        <TouchableOpacity
+          onPress={navigateToHome}
+          activeOpacity={1} // 禁用透明度变化
+          // 禁用背景色变化
+          style={styles.titleContainer}
+        >
+          <ThemedText
+            numberOfLines={1}
+            ellipsizeMode="head"
+            style={[styles.title, headerTitleStyle]}
+          >
+            {title}
+          </ThemedText>
+        </TouchableOpacity>
 
-        {/* 右侧：图标组 */}
+        {/* 右侧：图标组 或 自定义组件 */}
         <ThemedView style={styles.rightActions}>
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-            <Icon name="search" size={24} color="#000" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('History')}>
-            <Icon name="history" size={24} color="#000" />
-          </TouchableOpacity>
+          {rightComponent ? (
+            rightComponent
+          ) : (
+            <>
+              <TouchableOpacity 
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              onPress={() => navigation.navigate('Search')}>
+                <MaterialIcons
+                  name="search"
+                  size={24}
+                  color={theme.colors.onSurface}
+                />
+              </TouchableOpacity>
+            </>
+          )}
         </ThemedView>
       </ThemedView>
     </SafeAreaView>
   );
 };
 
-export default memo(CustomHeader);
+export default memo(CustomHeader, (prevProps, nextProps) => {
+  return (
+    prevProps.title === nextProps.title &&
+    prevProps.headerTitleStyle === nextProps.headerTitleStyle &&
+    prevProps.rightComponent === nextProps.rightComponent
+  );
+});
 
-// 样式分离
+// 样式定义
 const styles = StyleSheet.create({
   safeArea: {
-    // backgroundColor: '#ffffff',
+    // backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    height: 56,
+    backgroundColor: 'transparent',
+    height: 28,
     elevation: 4,
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 4,
+    shadowRadius: 2,
   },
   leftActions: {
     flexDirection: 'row',
-    gap: 16,
+    backgroundColor: 'transparent',
+    gap: 12,
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    flex: 1,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginHorizontal: 16,
+    marginHorizontal: 12,
   },
   rightActions: {
+    backgroundColor: 'transparent',
+
     flexDirection: 'row',
-    gap: 16,
+    gap: 12,
   },
 });

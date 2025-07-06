@@ -1,15 +1,14 @@
 import {
   DarkTheme,
   DefaultTheme,
+  Theme,
   ThemeProvider,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-// import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { useColorScheme } from '@/hooks/useColorScheme';
 import AppNavigator from './navigation/AppNavigator';
 

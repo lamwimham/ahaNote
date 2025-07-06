@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  TouchableOpacity,
   StyleSheet,
   Keyboard,
   KeyboardAvoidingView,
@@ -15,8 +14,6 @@ import BottomSheet, {
   BottomSheetView,
   BottomSheetTextInput,
 } from '@gorhom/bottom-sheet';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/Feather';
 import { ThemedView } from './ThemedView';
 
 interface BottomSheetInputProps {
@@ -34,32 +31,18 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
   snapPoints = ['70%'],
   text = '',
 }) => {
-  // console.log('传入的text', text, visible);
   const isClosing = useRef(false);
   const [inputText, setInputText] = useState(text);
-  // setInputText(text);
-  // console.log('inputText', inputText);
   const bottomSheetRef = useRef<BottomSheetMethods>(null);
   const blurTimeout = useRef<NodeJS.Timeout | null>(null);
 
   // 应用状态监听
-  // const appState = useRef(AppState.currentState);
-  // const [appStateVisible, setAppStateVisible] = useState(appState.current);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const safeInsets = useSafeAreaInsets();
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [wasKeyboardVisible, setWasKeyboardVisible] = useState(false);
   const appStateRef = useRef(AppState.currentState);
   const isInputFocused = useRef(false);
   const inputRef = useRef<any>(null);
-
-  // 编辑器状态
-  const [formats, setFormats] = useState({
-    bold: false,
-    italic: false,
-    underline: false,
-    list: false,
-  });
 
   // 更新聚焦状态
   const handleFocus = () => {
@@ -81,25 +64,9 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
     }
   };
   
-  const toggleFormat = (key: 'bold' | 'italic' | 'underline' | 'list') => {
-    const newFormats = { ...formats, [key]: !formats[key] };
-    setFormats(newFormats);
-  };
-
-  // 自定义工具栏底部边距
-  const getToolbarMargin = () => {
-    console.log('isKeyboardVisible', isKeyboardVisible);
-    if (isKeyboardVisible) {
-      return 10;
-    }
-    return Platform.OS === 'ios' ? Math.max(safeInsets.bottom, 16) : 16;
-  };
-  
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       appStateRef.current = nextAppState;
-      // setAppStateVisible(nextAppState);
-      
       if (nextAppState === 'active') {
         if (wasKeyboardVisible) {
           setTimeout(() => {
@@ -128,8 +95,9 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
   }, [wasKeyboardVisible, visible, keyboardHeight]);
 
   useEffect(() => {
+    const timeout = blurTimeout.current;
     return () => {
-      if (blurTimeout.current) clearTimeout(blurTimeout.current);
+      if (timeout) clearTimeout(timeout);
       isClosing.current = false;
     };
   }, []);
@@ -147,7 +115,7 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
         bottomSheetRef.current.snapToIndex(-1);
       }
     }
-  }, [visible]);
+  }, [visible, text]);
 
   const handleSheetChanges = useCallback(
     (index: number) => {
@@ -185,13 +153,15 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
       setKeyboardHeight(0);
     });
 
+    const timeout = blurTimeout.current;
+
     return () => {
       keyboardDidShow.remove();
       keyboardDidHide.remove();
-      if (blurTimeout.current) clearTimeout(blurTimeout.current);
+      if (timeout) clearTimeout(timeout);
       isClosing.current = false;
     };
-  }, [onClose, inputText, isInputFocused]);
+  }, [onClose, inputText, isInputFocused, keyboardHeight]);
 
   // 处理背景点击关闭
   const handleBackgroundPress = () => {
@@ -239,6 +209,7 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
               submitBehavior="submit"
               onFocus={handleFocus}
               onBlur={handleBlur}
+              autoFocus
             />
           </BottomSheetView>
 
@@ -247,31 +218,6 @@ const BottomSheetInput: React.FC<BottomSheetInputProps> = ({
     </ThemedView>
   );
 };
-
-// 工具栏按钮组件
-const ToolbarButton = ({ 
-  active, 
-  icon, 
-  onPress 
-}: { 
-  active: boolean; 
-  icon: string; 
-  onPress: () => void; 
-}) => (
-  <TouchableOpacity
-    style={[
-      styles.toolbarButton,
-      active && styles.activeButton
-    ]}
-    onPress={onPress}
-  >
-    <Icon
-      name={icon}
-      size={20}
-      color={active ? '#007AFF' : '#333'}
-    />
-  </TouchableOpacity>
-);
 
 const styles = StyleSheet.create({
   // 容器样式
@@ -304,7 +250,6 @@ const styles = StyleSheet.create({
   
   toolbarContainer: {
     paddingVertical: 2,
-    // borderTopWidth: 1,
     borderTopColor: '#ddd',
     backgroundColor: '#fff',
   },

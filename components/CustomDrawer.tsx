@@ -1,28 +1,27 @@
 // /src/components/CustomDrawer.tsx
-
 import React from 'react';
 import {
-  View,
-  Text,
   SafeAreaView,
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
 import { Drawer, useTheme } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+// 正确使用
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { ThemedView } from './ThemedView';
 import { ThemedText } from './ThemedText';
 
 interface MenuItem {
-  icon: string;
+  icon: keyof typeof MaterialIcons.glyphMap;
   label: string;
   subItems?: { label: string; href: string }[];
 }
 
 const menuItems: MenuItem[] = [
   {
-    icon: 'person-outline',
+    icon: 'person',
     label: '个人信息',
     subItems: [
       { label: '基本资料', href: '/profile/basic' },
@@ -30,7 +29,7 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
-    icon: 'settings-outline',
+    icon: 'settings',
     label: '应用设置',
     subItems: [
       { label: '通知设置', href: '/settings/notifications' },
@@ -48,7 +47,7 @@ export const CustomDrawer = (props: any) => {
       <SafeAreaView style={styles.container}>
         {/* 用户信息 */}
         <ThemedView style={[styles.profileSection, { backgroundColor: theme.colors.surfaceVariant }]}>
-          <Icon name="person-circle-outline" size={64} color={theme.colors.onSurface} />
+          <MaterialIcons name="person" size={64} color={theme.colors.onSurface} />
           <ThemedView style={styles.profileInfo}>
             <ThemedText style={{ fontSize: 20, fontWeight: 'bold' }}>用户名</ThemedText>
             <ThemedText style={{ fontSize: 14, color: 'gray' }}>user@example.com</ThemedText>
@@ -62,7 +61,7 @@ export const CustomDrawer = (props: any) => {
               onPress={() => setExpandedItem(expandedItem === item.label ? null : item.label)}
             >
               <ThemedView style={styles.collapsibleHeader}>
-                <Icon name={item.icon} size={24} color={theme.colors.onSurface} />
+                <MaterialIcons name={item.icon } size={24} color={theme.colors.onSurface} />
                 <ThemedText style={{ marginLeft: 16 }}>{item.label}</ThemedText>
               </ThemedView>
             </TouchableWithoutFeedback>
